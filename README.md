@@ -15,8 +15,7 @@ Clarifications
 
 
 Code to run:
-
+```
 ./wlp4scan < input.txt > output.txt // my version
-
 wlp4scan < input.txt > expect.txt   // correct version
-
+```
