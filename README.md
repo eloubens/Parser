@@ -1,21 +1,33 @@
-# Parser
-Write a scanner for WLP4. The scanner should read a WLP4 program from standard input and tokenize it, producing a sequence of lines, each representing one token of the program. Each line should be terminated by a line feed (ASCII 0x0A) and should contain the token kind (the all-caps name indicating the type of the token, such as ID, NUM, LPAREN, etc. as defined in the WLP4 Specification), followed by a single space, followed by the token lexeme (the actual string represented by the token).
+#Parser
+Produce a representation of a parse tree as output.
 
-Whitespace and comments are not considered tokens and should not be part of the output. However, tokens in the input might be separated by whitespace or comments.
+The input format is simply the output format of the WLP4 scanner.
 
-If the input cannot be scanned into a sequence of valid tokens as per the requirements in the WLP4 Specification, your program must print an error message containing the string ERROR in all caps to standard error and exit normally.
+The output format of the parser is also different. You should construct a parse tree for the program, in which the value stored at each node in the tree is either the production rule used to expand the nonterminal at the node (if it is an internal node), or the token kind and lexeme (if it is a leaf node). If the parse is successful, the print the node values, one per line, using a left-to-right preorder traversal of the tree:
 
-For programs with a valid tokenization, your output should be identical to that of the wlp4scan tool.
+Print the value at the root of the tree (that is, print the production rule or the token kind and lexeme, depending on which kind of node).
+Visit the children in order from left to right. For each child subtree, recursively print the values in the subtree using a left-to-right preorder traversal.
+The result of this preorder traversal is a .wlp4i (WLP4 Intermediate) file.
 
-Clarifications
-- If a NUM token's numeric value is out of range (that is, it represents a number strictly greater than 231 - 1 = 2147483647) you should report an error.
-- If you see something like 2147483647999, you should treat it as one NUM token, and report an error since it is out of range, rather than treating it as two in-range NUM tokens (2147483647 and 999).
-- In the earlier Simplified Maximal Munch scanner problem, you were provided a scanning DFA, followed by a string to scan using the DFA. For this problem, the input to your program is simply WLP4 source code. That is, the input will not include a DFA for WLP4 tokens. You will likely have to create such a DFA yourself and embed it in your program somehow.
-- If you want to reuse your DFA reading code from the earlier problems, you could embed it as a multi-line string literal (these are called raw strings in C++ and here strings in Racket) and then read it from a stringstream (C++) or using open-input-string (Racket).
+In this problem, it is possible that the parse will be unsuccessful. This happens if there is no transition on the kind of the next token when the parsing DFA tells you to shift. If this occurs, output a single line consisting of the string ERROR at k (terminated with a line feed) to standard error, where k is one greater than the number of WLP4 tokens that were successfully read from the input prior to the error.
+
+Note that BOF and EOF are not part of the input, so they do not contribute to the value of k in this problem. Note also that "one token" means a kind and lexeme pair; so each line of the input contains one token.
+
+Unlike in some earlier assignments, where your error message simply had to contain "ERROR", in this problem your error message must exactly match the required message. Extraneous output (such as debugging output) on standard error will cause you to fail some Marmoset tests.
+
+
+```
+wlp4data.h is a C++ header file that provides four string constants:
+WLP4_CFG is a CFG component for the augmented WLP4 grammar.
+WLP4_TRANSITIONS is a TRANSITIONS component for the WLP4 SLR(1) DFA.
+WLP4_REDUCTIONS is a REDUCTIONS component for the WLP4 SLR(1) DFA.
+WLP4_COMBINED is a single string containing the above three strings followed by a .END line.
+```
 
 
 Code to run:
 ```
-./wlp4scan < input.txt > output.txt // my version
-wlp4scan < input.txt > expect.txt   // correct version
+g++ -g -std=c++17 -Wall wlp4parse.cc wlp4data.h -o l
+./l < input.txt > output.txt         // my version
+wlp4parse < input.txt > expect.txt   // correct version
 ```
