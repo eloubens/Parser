@@ -14,37 +14,6 @@ Clarifications
 - If you want to reuse your DFA reading code from the earlier problems, you could embed it as a multi-line string literal (these are called raw strings in C++ and here strings in Racket) and then read it from a stringstream (C++) or using open-input-string (Racket).
 
 
-Example
-If the input is this WLP4 program:
-
-//
-// WLP4 program with two integer parameters, a and b
-//   returns the sum of a and b
-//
-   int wain(int a, int b) {
-     return a + b;   // unhelpful comment about summing a and b
-   }
-   
-Then the correct output is:
-
-INT int
-WAIN wain
-LPAREN (
-INT int
-ID a
-COMMA ,
-INT int
-ID b
-RPAREN )
-LBRACE {
-RETURN return
-ID a
-PLUS +
-ID b
-SEMI ;
-RBRACE }
-
-
 Code to run:
 ./wlp4scan < input.txt > output.txt // my version
 wlp4scan < input.txt > expect.txt   // correct version
