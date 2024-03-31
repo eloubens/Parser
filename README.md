@@ -32,3 +32,54 @@ g++ -g -std=c++17 -Wall wlp4parse.cc wlp4data.h -o l
 ./l < input.txt > output.txt         // my version
 wlp4parse < input.txt > expect.txt   // correct version
 ```
+
+
+
+Output explained:
+```
+output:
+start BOF procedures EOF
+BOF BOF
+procedures main
+main INT WAIN LPAREN dcl COMMA dcl RPAREN LBRACE dcls statements RETURN expr SEMI RBRACE
+INT int
+WAIN wain
+LPAREN (
+dcl type ID
+type INT
+INT int
+ID foo
+COMMA ,
+dcl type ID
+type INT
+INT int
+ID bar
+RPAREN )
+LBRACE {
+dcls .EMPTY
+statements .EMPTY
+RETURN return
+expr term
+term factor
+factor NUM
+NUM 42
+SEMI ;
+RBRACE }
+EOF EOF
+
+
+Explanation:
+1. Notation:
+start BOF procedures EOF
+means
+start -> BOF procedures EOF
+
+2. Order:
+The next line would the transitions for the children of the current transition.
+Eg.
+start BOF procedures EOF  =  start -> BOF procedures EOF
+Then the next lines would be the trasitions for BOF : BOF -> BOF
+Then the next lines would be the trasitions for procedures : there are a lot.
+Then the next lines would be the trasitions for EOF :  EOF -> EOF
+
+```
