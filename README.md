@@ -8,12 +8,12 @@ If the input cannot be scanned into a sequence of valid tokens as per the requir
 For programs with a valid tokenization, your output should be identical to that of the wlp4scan tool.
 
 Clarifications
-If a NUM token's numeric value is out of range (that is, it represents a number strictly greater than 231 - 1 = 2147483647) you should report an error.
-If you see something like 2147483647999, you should treat it as one NUM token, and report an error since it is out of range, rather than treating it as two in-range NUM tokens (2147483647 and 999).
-In the earlier Simplified Maximal Munch scanner problem, you were provided a scanning DFA, followed by a string to scan using the DFA. For this problem, the input to your program is simply WLP4 source code. That is, the input will not include a DFA for WLP4 tokens. You will likely have to create such a DFA yourself and embed it in your program somehow.
-If you want to reuse your DFA reading code from the earlier problems, you could embed it as a multi-line string literal (these are called raw strings in C++ and here strings in Racket) and then read it from a stringstream (C++) or using open-input-string (Racket).
-You could also submit the DFA as a separate file (zip it together with your program) and have your program read it using file I/O. However, note that Marmoset blocks you from writing to files. This means you should open the file as read-only; otherwise opening the file could fail and cause unexpected errors in your code. In C++, you can use std::ifstream to open a file as read-only. In Racket, open-input-file should work.
-You are allowed to refer to the scanner code that was provided in Assignment 3 while solving this problem. You can even base your solution on this provided scanner code if you really want to, although you will likely have an easier and more fun time if you build your scanner on top of the Simplified Maximal Munch scanner you wrote earlier in the assignment.
+- If a NUM token's numeric value is out of range (that is, it represents a number strictly greater than 231 - 1 = 2147483647) you should report an error.
+- If you see something like 2147483647999, you should treat it as one NUM token, and report an error since it is out of range, rather than treating it as two in-range NUM tokens (2147483647 and 999).
+- In the earlier Simplified Maximal Munch scanner problem, you were provided a scanning DFA, followed by a string to scan using the DFA. For this problem, the input to your program is simply WLP4 source code. That is, the input will not include a DFA for WLP4 tokens. You will likely have to create such a DFA yourself and embed it in your program somehow.
+- If you want to reuse your DFA reading code from the earlier problems, you could embed it as a multi-line string literal (these are called raw strings in C++ and here strings in Racket) and then read it from a stringstream (C++) or using open-input-string (Racket).
+
+
 Example
 If the input is this WLP4 program:
 
@@ -24,6 +24,7 @@ If the input is this WLP4 program:
    int wain(int a, int b) {
      return a + b;   // unhelpful comment about summing a and b
    }
+   
 Then the correct output is:
 
 INT int
@@ -42,3 +43,9 @@ PLUS +
 ID b
 SEMI ;
 RBRACE }
+
+
+Code to run:
+./wlp4scan < input.txt > output.txt // my version
+wlp4scan < input.txt > expect.txt   // correct version
+
