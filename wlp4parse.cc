@@ -66,7 +66,7 @@ void print(const std::vector<std::pair<std::string, std::string>> &iseq, const s
     
     std::cout << ". " << std::endl;
     for (auto [token, val]  : iseq) {
-        std::cout << token << " ";// << val << " ";
+        std::cout << token << " ";
     }
     std::cout << std::endl;
 }
@@ -81,7 +81,7 @@ void printFirst(const std::vector<std::pair<std::string, std::string>> &iseq, co
     
     std::cout << ". " << std::endl;
     for (auto [token, val]  : iseq) {
-        std::cout << token << " ";// << val << " ";
+        std::cout << token << " ";
     }
     std::cout << std::endl;
 }
@@ -111,7 +111,7 @@ int main() {
 
     // initialize given CFG
     std::istringstream c{WLP4_CFG};
-    getline(c, l); // get rid fo CFG header
+    getline(c, l); // get rid of CFG header
 
     // .CFG section
     while(std::getline(c, l) && l[0] != '.' ) {
@@ -161,7 +161,6 @@ int main() {
 
     int state = 0; 
     int k = 0;
-    // print(iseq, redseq);
 
     while(iseq.size() != 0) {
         if (reduct.count(std::make_pair(state, iseq[0].first)) > 0) {
