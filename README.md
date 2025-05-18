@@ -1,6 +1,6 @@
 ##Parser
 
-Produce a representation of a parse tree as output.
+This code produces a representation of a parse tree as output.
 
 The input format is simply the output format of the WLP4 scanner.
 
@@ -12,10 +12,7 @@ The result of this preorder traversal is a .wlp4i (WLP4 Intermediate) file.
 
 In this problem, it is possible that the parse will be unsuccessful. This happens if there is no transition on the kind of the next token when the parsing DFA tells you to shift. If this occurs, output a single line consisting of the string ERROR at k (terminated with a line feed) to standard error, where k is one greater than the number of WLP4 tokens that were successfully read from the input prior to the error.
 
-Note that BOF and EOF are not part of the input, so they do not contribute to the value of k in this problem. Note also that "one token" means a kind and lexeme pair; so each line of the input contains one token.
-
-Unlike in some earlier assignments, where your error message simply had to contain "ERROR", in this problem your error message must exactly match the required message. Extraneous output (such as debugging output) on standard error will cause you to fail some Marmoset tests.
-
+BOF and EOF are not part of the input, so they do not contribute to the value of k. Also, "one token" means a kind and lexeme pair; so each line of the input contains one token.
 
 ```
 wlp4data.h is a C++ header file that provides four string constants:
