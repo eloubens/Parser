@@ -46,12 +46,12 @@ NEWLINE: (ascii 10)
 COMMENT: the string "//" followed by all the characters up to and including the next NEWLINE
 WLP4 programs are constructed by tokenizing (also called scanning or lexing) an ASCII string. To ensure a unique sequence of tokens is produced, the sequence of tokens is constructed by repeatedly choosing the longest prefix of the input that is either a token or white space. If the prefix is a token, it is added to the end of the WLP4 program token sequence. Then the prefix is discarded, and this process repeats with the remainder of the ASCII string input. This continues until either the end of the input is reached, or no prefix of the remaining input is a token or white space. In the latter case, the ASCII string is lexically invalid and does not represent a WLP4 program.
 
-Context-Free Syntax
-A context-free grammar for a valid WLP4 program is:
-terminal symbols: the set of valid tokens above
-nonterminal symbols: {procedures, procedure, main, params, paramlist, type, dcl, dcls, statements, lvalue, expr, statement, test, term, factor, arglist}
-start symbol: procedures
-production rules:
+Context-Free Syntax:
+A CFG (context-free grammar) for WLP4 is:
+- terminal symbols: the set of valid tokens above
+- nonterminal symbols: {procedures, procedure, main, params, paramlist, type, dcl, dcls, statements, lvalue, expr, statement, test, term, factor, arglist}
+- start symbol: procedures
+- production rules:
 procedures → procedure procedures
 procedures → main
 procedure → INT ID LPAREN params RPAREN LBRACE dcls statements RETURN expr SEMI RBRACE 
