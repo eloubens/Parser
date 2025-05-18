@@ -31,6 +31,9 @@ wlp4parse < input.txt > expect.txt ## depreciated command
 - `WLP4_REDUCTIONS` is a REDUCTIONS component for the WLP4 SLR(1) DFA. It is used to decide which grammar rule to apply to reduce a sequence of symbols on the stack.
 - `WLP4_COMBINED` is a combination of all the 3 sections  followed by a .END line.
 
+### File WLP4.txt:
+Contains `WLP4` language specifications.
+
 ### Example
 Input:
 ```
