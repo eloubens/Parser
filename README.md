@@ -24,17 +24,17 @@ g++ -g -std=c++17 -Wall wlp4parse.cc wlp4data.h -o l
 wlp4parse < input.txt > expect.txt ## depreciated command
 ```
 
-### File wlp4data.h:
-`wlp4data.h` is a C++ header file that provides four string constants:
+### Files
+
+`wlp4data.h`: Is a C++ header file that provides four string constants:
 - `WLP4_CFG` is a CFG (context free grammar) component for the augmented WLP4 grammar. It defines the grammar productions for the WLP4 language.
 - `WLP4_TRANSITIONS` is a TRANSITIONS component for the WLP4 SLR(1) DFA. This is the DFA (deterministic finite automaton) representation of WLP4_CFG for the parser. Each line represents the current state, the token, and the next transition state for the particular token. This section is used to decide the next parser state when reading the next input token (for shifting). SLR(1) defines the type of DFA -> a simple left-to-right rightmost-derivation parser with 1 symbol lookahead.
 - `WLP4_REDUCTIONS` is a REDUCTIONS component for the WLP4 SLR(1) DFA. It is used to decide which grammar rule to apply to reduce a sequence of symbols on the stack.
 - `WLP4_COMBINED` is a combination of all the 3 sections  followed by a .END line.
 
-### File WLP4.txt:
-Contains `WLP4` language specifications.
+`WLP4.txt`: Contains `WLP4` language specifications.
 
-### Example
+### Example:
 Input:
 ```
 INT int
